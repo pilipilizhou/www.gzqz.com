@@ -69,6 +69,7 @@ class ProfessionController extends Controller
          }else{
              $buyState = "canBuy";
          }
+
         return view('home.profession.detail')->with([
             'professionInfo'=>$professionInfo,
             'buyState'=>$buyState

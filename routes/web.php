@@ -308,6 +308,14 @@ Route::group(['prefix'=>'/Home/Order'],function (){
 
 
 
+// 点播
+Route::group(['prefix'=>'/Home/playVideo'],function (){
+    // 直播详情
+    Route::get('/video/{lesson_id}','Home\PlayVideoController@index');
+});
+
+
+
 
 
 

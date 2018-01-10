@@ -83,7 +83,7 @@
                 </p>
                 <div class="bigpic-body-btn">
                     @if($buyState == "cannotBuy")
-                        <a href="javascript:void(0);" class="gotengxun purchase">开始学习</a>
+                        <a href="javascript:void(0);" class="gotengxun purchase">开始学习吧!</a>
                     @elseif($buyState == "payMoney")
                         <a href="javascript:void(0);" class="gotengxun purchase">付款</a>
                         <p style="position: absolute;display:block;color: rgb(1,193,152);bottom:27px;font-size: 16px;">请勿重复下单，请继续点击付款按钮付款</p>
@@ -163,7 +163,13 @@
                             <div class="details-div"><p class="details-div-title">{{ $course->course_name }}</p>
                                 <div class="details-div-body">
                                     @foreach($course->lesson as $key=>$lesson)
-                                        <p title="1-{{ $lesson->lesson_name }}">{{ $key+1 }}-{{ $lesson->lesson_name }}</p>
+                                        @if($buyState =="cannotBuy")
+                                            <p title="1-{{ $lesson->lesson_name }}"><a href='{{url('/Home/playVideo/video/'.$lesson->id)}}' style="color: rgb(1, 193, 152);text-decoration:underline!important; ">{{ $key+1 }}-{{ $lesson->lesson_name }}</a></p>
+                                        @elseif($buyState ="payMoney")
+                                            <p title="1-{{ $lesson->lesson_name }}">{{ $key+1 }}-{{ $lesson->lesson_name }}</p>
+                                        @elseif($buyState =="canBuy")
+                                            <p title="1-{{ $lesson->lesson_name }}">{{ $key+1 }}-{{ $lesson->lesson_name }}</p>
+                                        @endif
                                     @endforeach
                                 </div>
                             </div>
@@ -175,7 +181,7 @@
             <div class="pages" style="display: none;">
                 <div id="Pagination"></div>
             </div>
-        </div>
+        </div>                                      
         
 
     </div>
@@ -212,19 +218,25 @@
         /*课程大纲*/
         $(".course-list").on("click",function () {
             $('#tab_pagesBox').children('.table-modal').empty();
-            var domCourse = " <div class=\"table-school\">\n" +
-                "                        @foreach( $professionInfo->course as $course )\n" +
-                "                            <div class=\"table-school-body\">\n" +
-                "                                <div class=\"details-div\"><p class=\"details-div-title\">{{ $course->course_name }}</p>\n" +
-                "                                    <div class=\"details-div-body\">\n" +
-                "                                            @foreach($course->lesson as $key=>$lesson)\n" +
-                "                                                <p title=\"1-{{ $lesson->lesson_name }}\">{{ $key+1 }}-{{ $lesson->lesson_name }}</p>\n" +
-                "                                            @endforeach\n" +
-                "                                    </div>\n" +
-                "                                </div>\n" +
-                "                            </div>\n" +
-                "                        @endforeach\n" +
-                "                    </div>";
+            var domCourse = ' <div class="table-school">\n' +
+                '                    @foreach( $professionInfo->course as $course )\n' +
+                '                        <div class="table-school-body">\n' +
+                '                            <div class="details-div"><p class="details-div-title">{{ $course->course_name }}</p>\n' +
+                '                                <div class="details-div-body">\n' +
+                '                                    @foreach($course->lesson as $key=>$lesson)\n' +
+                '                                        @if($buyState =="cannotBuy")\n' +
+                '                                            <p title="1-{{ $lesson->lesson_name }}"><a href="#" style="color: rgb(1, 193, 152);text-decoration:underline!important; ">{{ $key+1 }}-{{ $lesson->lesson_name }}</a></p>\n' +
+                '                                        @elseif($buyState ="payMoney")\n' +
+                '                                            <p title="1-{{ $lesson->lesson_name }}">{{ $key+1 }}-{{ $lesson->lesson_name }}</p>\n' +
+                '                                        @elseif($buyState =="canBuy")\n' +
+                '                                            <p title="1-{{ $lesson->lesson_name }}">{{ $key+1 }}-{{ $lesson->lesson_name }}</p>\n' +
+                '                                        @endif\n' +
+                '                                    @endforeach\n' +
+                '                                </div>\n' +
+                '                            </div>\n' +
+                '                        </div>\n' +
+                '                    @endforeach\n' +
+                '                </div>';
             $('#tab_pagesBox').children('.table-modal').html(domCourse);
         });
 
