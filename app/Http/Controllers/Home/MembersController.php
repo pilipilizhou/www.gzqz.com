@@ -45,7 +45,6 @@ class MembersController extends Controller
         }
 
 
-        
         // 获取前4个排序最高的推荐课程   推荐is_recommend+ 排序 sort
         $list2 = $bestProfession = $profession->where("is_recommend",1)->orderBy("sort",'desc')->limit(4)->get();
         foreach($list2 as $key => $item) {

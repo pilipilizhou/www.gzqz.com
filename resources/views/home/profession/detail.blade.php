@@ -60,9 +60,45 @@
     <div class="nav" id="showIntroduct">
         <a href="https://www.boxuegu.com/index.html">云课堂</a><span> &gt; </span><a class="myClassName" href="https://www.boxuegu.com/web/html/courseIntroductionPage.html?id=76&amp;courseType=0&amp;free=undefined">{{ $professionInfo->profession_name }}</a><span> &gt; </span><span style="margin-left:0px">课程详情</span>
     </div>
+
+    
     <div class="bigpic">
-        <div class="bigpic-title"><div class="bigpic-img"><img src="{{config('program.url')}}/{{ $professionInfo->cover }}"></div><div class="bigpic-body"><span class="bigpic-body-title"><span class="bigpic-body-title-nav">{{ $professionInfo->profession_name }}{{$buyState}}</span></span><span id="d_clip_button" class="shareCourse" data-clipboard-target="fe_text"></span><p class="bigpic-body-text dot-ellipsis" title="{{ $professionInfo->profession_desc }}">{{ $professionInfo->profession_desc }}</p><p class="bigpic-body-list"><span class="body-list-right">主讲：{{ $professionInfo->teacher_ids }}</span><span class="body-list-right myTimes" title="课程时长" style="cursor:default">学习时长：{{ $professionInfo->duration }}小时</span><span title="学习人数" style="cursor:default">学习人数：{{ $professionInfo->number }}人已学习</span><span title="有效期" style="cursor:default;color:#333;" class="youxiaoqi">有效期：{{ $professionInfo->expire_at }}天<span class="yibaoming" style="display:none"><img src="/mhome/img/baoming.png"></span></span></p><p class="bigpic-body-money"><span class="bigpic-body-redmoney">￥{{ round($professionInfo->price - $professionInfo->sale_price ,2) }}</span><del class="bigpic-body-notmoney">￥{{ $professionInfo->price }}</del></p><div class="bigpic-body-btn"><a href="{{ url('/Home/Order/Order/profession/'. $professionInfo->id ) }}" class="gotengxun purchase">立即报名</a><a class="free-try-to-lean">免费试学</a></div></div></div>
+        <div class="bigpic-title">
+            <div class="bigpic-img"><img src="{{config('program.url')}}/{{ $professionInfo->cover }}"></div>
+            <div class="bigpic-body">
+                <span class="bigpic-body-title"><span class="bigpic-body-title-nav">{{ $professionInfo->profession_name }}{{$buyState}}</span></span>
+                <span id="d_clip_button" class="shareCourse" data-clipboard-target="fe_text"></span>
+                <p class="bigpic-body-text dot-ellipsis" title="{{ $professionInfo->profession_desc }}">{{ $professionInfo->profession_desc }}</p>
+                <p class="bigpic-body-list">
+                    <span class="body-list-right">主讲：{{ $professionInfo->teacher_ids }}</span>
+                    <span class="body-list-right myTimes" title="课程时长" style="cursor:default">学习时长：{{ $professionInfo->duration }}小时</span>
+                    <span title="学习人数" style="cursor:default">学习人数：{{ $professionInfo->number }}人已学习</span>
+                    <span title="有效期" style="cursor:default;color:#333;" class="youxiaoqi">有效期：{{ $professionInfo->expire_at }}天
+                        <span class="yibaoming" style="display:none"><img src="/mhome/img/baoming.png"></span>
+                    </span>
+                </p>
+                <p class="bigpic-body-money">
+                    <span class="bigpic-body-redmoney">￥{{ round($professionInfo->price - $professionInfo->sale_price ,2) }}</span>
+                    <del class="bigpic-body-notmoney">￥{{ $professionInfo->price }}</del>
+                </p>
+                <div class="bigpic-body-btn">
+                    @if($buyState == "cannotBuy")
+                        <a href="javascript:void(0);" class="gotengxun purchase">开始学习</a>
+                    @elseif($buyState == "payMoney")
+                        <a href="javascript:void(0);" class="gotengxun purchase">付款</a>
+                        <p style="position: absolute;display:block;color: rgb(1,193,152);bottom:27px;font-size: 16px;">请勿重复下单，请继续点击付款按钮付款</p>
+                    @else
+                        {{-- $buyState == "canBuy" --}}
+                        <a href="{{ url('/Home/Order/Order/profession/'. $professionInfo->id ) }}" class="gotengxun purchase">立即报名</a>
+                    @endif
+
+                    <a class="free-try-to-lean">免费试学</a>
+                </div>
+            </div>
+        </div>
     </div>
+
+    
     <div id="introductBox">
         <div id="introduct">
             <div class="course" id="detail-course">
