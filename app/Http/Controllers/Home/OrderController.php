@@ -40,7 +40,7 @@ class OrderController extends Controller
             'status' => 0,   // 订单状态
             'profession_id'=> $goods->profession_name?$goods->id:null,
             'course_id' => $goods->course_name?$goods->id:null,
-            'member_id' => \Auth::guard('memberAuth')->user()->id,   // 会员ID
+            'member_id' => Auth::guard('memberAuth')->user()->id,   // 会员ID
             'order_name' => $goods->profession_name?$goods->profession_name:$goods->course_name,
             'price' => round($goods->price - $goods->sale_price, 2), // 订单号
         ]);
@@ -131,7 +131,7 @@ class OrderController extends Controller
             $pay_recode->create([
                 'profession_id' => $order->profession_id,
                 'course_id'     => $order->course_id,
-                'member_id'     => \Auth::guard('memberAuth')->user()->member_id,
+                'member_id'     => Auth::guard('memberAuth')->user()->id,
                 'expire_start'  => date('Y-m-d H:i:s',strtotime($res['time_end']) ),
                 'expire_end'    => date('Y-m-d H:i:s',strtotime($res['time_end']) + $goods->expire_at * 86400 ),
             ]);
