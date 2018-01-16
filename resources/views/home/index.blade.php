@@ -75,9 +75,11 @@
 
         </div>
     </div>
-    <div class="modal" id="login" data-backdrop="static" style="display: none;">
+    <div class="modal" id="login" data-backdrop="static" style="display: none; ">
+
         <div class="modal-dialog login-module" role="document">
-            <div class="cymylogin">
+            <div class="cymylogin" style="position: relative;" >
+                <a class="close-login">x</a>
                 <div class="cymylogin-top clearfix">
                     <div class="cymyloginclose" data-dismiss="modal" aria-label="Close" data-backdrop="static"></div>
                     <div class="cymyloginlogo">欢迎登录&nbsp;&nbsp;安课在线教育平台</div>
@@ -492,6 +494,10 @@
         }, function(index){
             //按钮【按钮二】的回调
         });
+
+    }
+
+    function hiddenLogin() {
 
     }
 </script>
